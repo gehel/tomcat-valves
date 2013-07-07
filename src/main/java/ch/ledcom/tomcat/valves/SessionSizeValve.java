@@ -28,29 +28,45 @@ import org.apache.juli.logging.LogFactory;
 
 import ch.ledcom.tomcat.valves.objectexplorer.MemoryMeasurer;
 
+/**
+ * Logs the size of the HTTP session.
+ *
+ * For this valve to work, a Java Agent must be registered to initialize the
+ * object-explorer introspection. See README.md for details.
+ *
+ * @author gehel
+ */
 public class SessionSizeValve extends ValveBase {
 
+    /** logger. */
     private static Log log = LogFactory.getLog(SessionSizeValve.class);
 
+    /**
+     * Logs the size of the HTTP session.
+     *
+     * @param request the request being served
+     * @param response the response being generated
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
-    public void invoke(Request request, Response response) throws IOException,
-            ServletException {
+    public final void invoke(final Request request, final Response response)
+            throws IOException, ServletException {
         try {
             getNext().invoke(request, response);
         } finally {
-            if (request.getSession(false) == null) {
-                return;
+            if (!(request.getSession(false) == null)) {
+                @SuppressWarnings("unchecked")
+                Enumeration<String> attibuteNames = request.getSession()
+                        .getAttributeNames();
+                int sessionSize = 0;
+                while (attibuteNames.hasMoreElements()) {
+                    String attributeName = attibuteNames.nextElement();
+                    sessionSize += MemoryMeasurer.measureBytes(request
+                            .getSession().getAttribute(attributeName));
+                }
+                log.info(format("Session size = %d.", sessionSize));
             }
-            @SuppressWarnings("unchecked")
-            Enumeration<String> attibuteNames = request.getSession()
-                    .getAttributeNames();
-            int sessionSize = 0;
-            while (attibuteNames.hasMoreElements()) {
-                String attributeName = attibuteNames.nextElement();
-                sessionSize += MemoryMeasurer.measureBytes(request.getSession()
-                        .getAttribute(attributeName));
-            }
-            log.info(format("Session size = %d.", sessionSize));
         }
     }
 }

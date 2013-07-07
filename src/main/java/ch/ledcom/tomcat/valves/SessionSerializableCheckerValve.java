@@ -26,36 +26,53 @@ import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 import static java.lang.String.format;
 
+/**
+ * Checks if all session attributes are serializable.
+ *
+ * @author gehel
+ */
 public class SessionSerializableCheckerValve extends ValveBase {
 
+    /** logger. */
     private static Log log = LogFactory
             .getLog(SessionSerializableCheckerValve.class);
 
+    /**
+     * Check if all session attributes are serializable.
+     *
+     * @param request the request being served
+     * @param response the response being generated
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
-    public void invoke(Request request, Response response) throws IOException,
-            ServletException {
+    public final void invoke(final Request request, final Response response)
+            throws IOException, ServletException {
         try {
             getNext().invoke(request, response);
         } finally {
-            if (request.getSession(false) == null) {
-                return;
-            }
-            @SuppressWarnings("unchecked")
-            Enumeration<String> attibuteNames = request.getSession()
-                    .getAttributeNames();
-            while (attibuteNames.hasMoreElements()) {
-                String attributeName = attibuteNames.nextElement();
-                checkSerializable(request.getSession().getAttribute(
-                        attributeName));
+            if (!(request.getSession(false) == null)) {
+                @SuppressWarnings("unchecked")
+                Enumeration<String> attibuteNames = request.getSession()
+                        .getAttributeNames();
+                while (attibuteNames.hasMoreElements()) {
+                    String attributeName = attibuteNames.nextElement();
+                    checkSerializable(request.getSession().getAttribute(
+                            attributeName));
+                }
             }
         }
     }
 
-    private void checkSerializable(Object attribute) {
+    /**
+     * Check if an object is serializable, emit a warning log if it is not.
+     *
+     * @param attribute the attribute to check
+     */
+    private void checkSerializable(final Object attribute) {
         if (!Serializable.class.isAssignableFrom(attribute.getClass())) {
-            log.warn(format(
-                    "Session attribute [%s] of class [%s] is not serializeable.",
-                    attribute, attribute.getClass()));
+            log.warn(format("Session attribute [%s] of class [%s] is not "
+                    + "serializeable.", attribute, attribute.getClass()));
         }
     }
 }
