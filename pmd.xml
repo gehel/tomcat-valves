@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.3" timestamp="2013-07-07T17:21:06.592">
+<pmd version="4.3" timestamp="2013-07-07T17:26:12.652">
 <file name="/scratch/jenkins/workspace/tomcat-valves-deploy/src/main/java/ch/ledcom/tomcat/valves/SessionSerializableCheckerValve.java">
 <violation beginline="41" endline="41" begincolumn="17" endcolumn="23" rule="ReturnFromFinallyBlock" ruleset="Basic Rules" package="ch.ledcom.tomcat.valves" class="SessionSerializableCheckerValve" method="invoke" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#ReturnFromFinallyBlock" priority="3">
 Avoid returning from a finally block
