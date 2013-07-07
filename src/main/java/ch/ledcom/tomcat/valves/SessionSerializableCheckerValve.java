@@ -32,7 +32,7 @@ import com.google.common.io.ByteStreams;
 
 /**
  * Checks if all session attributes are serializable.
- * 
+ *
  * @author gehel
  */
 public class SessionSerializableCheckerValve extends ValveBase {
@@ -43,7 +43,7 @@ public class SessionSerializableCheckerValve extends ValveBase {
 
     /**
      * Check if all session attributes are serializable.
-     * 
+     *
      * @param request
      *            the request being served
      * @param response
@@ -59,10 +59,11 @@ public class SessionSerializableCheckerValve extends ValveBase {
         } finally {
             if (!(request.getSession(false) == null)) {
                 @SuppressWarnings("unchecked")
+                final
                 Enumeration<String> attibuteNames = request.getSession()
                         .getAttributeNames();
                 while (attibuteNames.hasMoreElements()) {
-                    String attributeName = attibuteNames.nextElement();
+                    final String attributeName = attibuteNames.nextElement();
                     checkSerializable(request.getSession().getAttribute(
                             attributeName));
                 }
@@ -72,7 +73,7 @@ public class SessionSerializableCheckerValve extends ValveBase {
 
     /**
      * Check if an object is serializable, emit a warning log if it is not.
-     * 
+     *
      * @param attribute
      *            the attribute to check
      */
@@ -85,7 +86,7 @@ public class SessionSerializableCheckerValve extends ValveBase {
         try {
             out = new ObjectOutputStream(ByteStreams.nullOutputStream());
             out.writeObject(attribute);
-        } catch (Exception e) {
+        } catch (final Exception e) {
             log.warn(
                     format("Session attribute [%s] of class [%s] threw "
                             + "exception while serializing.", attribute,
@@ -94,7 +95,7 @@ public class SessionSerializableCheckerValve extends ValveBase {
             if (out != null) {
                 try {
                     out.close();
-                } catch (IOException ignore) {
+                } catch (final IOException ignore) {
                 }
             }
         }
