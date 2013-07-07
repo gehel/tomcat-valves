@@ -13,7 +13,10 @@
  */
 package ch.ledcom.tomcat.valves;
 
+import static java.lang.String.format;
+
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Enumeration;
 
@@ -24,11 +27,12 @@ import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
-import static java.lang.String.format;
+
+import com.google.common.io.ByteStreams;
 
 /**
  * Checks if all session attributes are serializable.
- *
+ * 
  * @author gehel
  */
 public class SessionSerializableCheckerValve extends ValveBase {
@@ -39,9 +43,11 @@ public class SessionSerializableCheckerValve extends ValveBase {
 
     /**
      * Check if all session attributes are serializable.
-     *
-     * @param request the request being served
-     * @param response the response being generated
+     * 
+     * @param request
+     *            the request being served
+     * @param response
+     *            the response being generated
      * @throws IOException
      * @throws ServletException
      */
@@ -66,13 +72,31 @@ public class SessionSerializableCheckerValve extends ValveBase {
 
     /**
      * Check if an object is serializable, emit a warning log if it is not.
-     *
-     * @param attribute the attribute to check
+     * 
+     * @param attribute
+     *            the attribute to check
      */
     private void checkSerializable(final Object attribute) {
         if (!Serializable.class.isAssignableFrom(attribute.getClass())) {
             log.warn(format("Session attribute [%s] of class [%s] is not "
-                    + "serializeable.", attribute, attribute.getClass()));
+                    + "serializable.", attribute, attribute.getClass()));
+        }
+        ObjectOutputStream out = null;
+        try {
+            out = new ObjectOutputStream(ByteStreams.nullOutputStream());
+            out.writeObject(attribute);
+        } catch (Exception e) {
+            log.warn(
+                    format("Session attribute [%s] of class [%s] threw "
+                            + "exception while serializing.", attribute,
+                            attribute.getClass()), e);
+        } finally {
+            if (out != null) {
+                try {
+                    out.close();
+                } catch (IOException ignore) {
+                }
+            }
         }
     }
 }
