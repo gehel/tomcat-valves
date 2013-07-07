@@ -38,7 +38,7 @@
                   0
                 </td>
                 <td>
-                  6
+                  5
                 </td>
               </tr>
                           <tr>
@@ -99,20 +99,6 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.SessionSerializableCheckerValve.java">ch/ledcom/tomcat/valves/SessionSerializableCheckerValve.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  8
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.objectexplorer.ObjectVisitor.java">ch/ledcom/tomcat/valves/objectexplorer/ObjectVisitor.java</a>
                 </td>
                 <td>
@@ -123,6 +109,20 @@
                 </td>
                 <td>
                   1
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.SessionSerializableCheckerValve.java">ch/ledcom/tomcat/valves/SessionSerializableCheckerValve.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  9
                 </td>
               </tr>
                       </tbody>
