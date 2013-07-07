@@ -42,7 +42,7 @@
 <a class="jxr_linenumber" name="32" href="#32">32</a>  
 <a class="jxr_linenumber" name="33" href="#33">33</a>  <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="34" href="#34">34</a>  <em class="jxr_javadoccomment"> * Checks if all session attributes are serializable.</em>
-<a class="jxr_linenumber" name="35" href="#35">35</a>  <em class="jxr_javadoccomment"> * </em>
+<a class="jxr_linenumber" name="35" href="#35">35</a>  <em class="jxr_javadoccomment"> *</em>
 <a class="jxr_linenumber" name="36" href="#36">36</a>  <em class="jxr_javadoccomment"> * @author gehel</em>
 <a class="jxr_linenumber" name="37" href="#37">37</a>  <em class="jxr_javadoccomment"> */</em>
 <a class="jxr_linenumber" name="38" href="#38">38</a>  <strong class="jxr_keyword">public</strong> <strong class="jxr_keyword">class</strong> <a href="../../../../ch/ledcom/tomcat/valves/SessionSerializableCheckerValve.html">SessionSerializableCheckerValve</a> <strong class="jxr_keyword">extends</strong> ValveBase {
@@ -53,7 +53,7 @@
 <a class="jxr_linenumber" name="43" href="#43">43</a>  
 <a class="jxr_linenumber" name="44" href="#44">44</a>      <em class="jxr_javadoccomment">/**</em>
 <a class="jxr_linenumber" name="45" href="#45">45</a>  <em class="jxr_javadoccomment">     * Check if all session attributes are serializable.</em>
-<a class="jxr_linenumber" name="46" href="#46">46</a>  <em class="jxr_javadoccomment">     * </em>
+<a class="jxr_linenumber" name="46" href="#46">46</a>  <em class="jxr_javadoccomment">     *</em>
 <a class="jxr_linenumber" name="47" href="#47">47</a>  <em class="jxr_javadoccomment">     * @param request</em>
 <a class="jxr_linenumber" name="48" href="#48">48</a>  <em class="jxr_javadoccomment">     *            the request being served</em>
 <a class="jxr_linenumber" name="49" href="#49">49</a>  <em class="jxr_javadoccomment">     * @param response</em>
@@ -69,47 +69,48 @@
 <a class="jxr_linenumber" name="59" href="#59">59</a>          } <strong class="jxr_keyword">finally</strong> {
 <a class="jxr_linenumber" name="60" href="#60">60</a>              <strong class="jxr_keyword">if</strong> (!(request.getSession(false) == <strong class="jxr_keyword">null</strong>)) {
 <a class="jxr_linenumber" name="61" href="#61">61</a>                  @SuppressWarnings(<span class="jxr_string">"unchecked"</span>)
-<a class="jxr_linenumber" name="62" href="#62">62</a>                  Enumeration&lt;String&gt; attibuteNames = request.getSession()
-<a class="jxr_linenumber" name="63" href="#63">63</a>                          .getAttributeNames();
-<a class="jxr_linenumber" name="64" href="#64">64</a>                  <strong class="jxr_keyword">while</strong> (attibuteNames.hasMoreElements()) {
-<a class="jxr_linenumber" name="65" href="#65">65</a>                      String attributeName = attibuteNames.nextElement();
-<a class="jxr_linenumber" name="66" href="#66">66</a>                      checkSerializable(request.getSession().getAttribute(
-<a class="jxr_linenumber" name="67" href="#67">67</a>                              attributeName));
-<a class="jxr_linenumber" name="68" href="#68">68</a>                  }
-<a class="jxr_linenumber" name="69" href="#69">69</a>              }
-<a class="jxr_linenumber" name="70" href="#70">70</a>          }
-<a class="jxr_linenumber" name="71" href="#71">71</a>      }
-<a class="jxr_linenumber" name="72" href="#72">72</a>  
-<a class="jxr_linenumber" name="73" href="#73">73</a>      <em class="jxr_javadoccomment">/**</em>
-<a class="jxr_linenumber" name="74" href="#74">74</a>  <em class="jxr_javadoccomment">     * Check if an object is serializable, emit a warning log if it is not.</em>
-<a class="jxr_linenumber" name="75" href="#75">75</a>  <em class="jxr_javadoccomment">     * </em>
-<a class="jxr_linenumber" name="76" href="#76">76</a>  <em class="jxr_javadoccomment">     * @param attribute</em>
-<a class="jxr_linenumber" name="77" href="#77">77</a>  <em class="jxr_javadoccomment">     *            the attribute to check</em>
-<a class="jxr_linenumber" name="78" href="#78">78</a>  <em class="jxr_javadoccomment">     */</em>
-<a class="jxr_linenumber" name="79" href="#79">79</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> checkSerializable(<strong class="jxr_keyword">final</strong> Object attribute) {
-<a class="jxr_linenumber" name="80" href="#80">80</a>          <strong class="jxr_keyword">if</strong> (!Serializable.<strong class="jxr_keyword">class</strong>.isAssignableFrom(attribute.getClass())) {
-<a class="jxr_linenumber" name="81" href="#81">81</a>              log.warn(format(<span class="jxr_string">"Session attribute [%s] of class [%s] is not "</span>
-<a class="jxr_linenumber" name="82" href="#82">82</a>                      + <span class="jxr_string">"serializable."</span>, attribute, attribute.getClass()));
-<a class="jxr_linenumber" name="83" href="#83">83</a>          }
-<a class="jxr_linenumber" name="84" href="#84">84</a>          ObjectOutputStream out = <strong class="jxr_keyword">null</strong>;
-<a class="jxr_linenumber" name="85" href="#85">85</a>          <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="86" href="#86">86</a>              out = <strong class="jxr_keyword">new</strong> ObjectOutputStream(ByteStreams.nullOutputStream());
-<a class="jxr_linenumber" name="87" href="#87">87</a>              out.writeObject(attribute);
-<a class="jxr_linenumber" name="88" href="#88">88</a>          } <strong class="jxr_keyword">catch</strong> (Exception e) {
-<a class="jxr_linenumber" name="89" href="#89">89</a>              log.warn(
-<a class="jxr_linenumber" name="90" href="#90">90</a>                      format(<span class="jxr_string">"Session attribute [%s] of class [%s] threw "</span>
-<a class="jxr_linenumber" name="91" href="#91">91</a>                              + <span class="jxr_string">"exception while serializing."</span>, attribute,
-<a class="jxr_linenumber" name="92" href="#92">92</a>                              attribute.getClass()), e);
-<a class="jxr_linenumber" name="93" href="#93">93</a>          } <strong class="jxr_keyword">finally</strong> {
-<a class="jxr_linenumber" name="94" href="#94">94</a>              <strong class="jxr_keyword">if</strong> (out != <strong class="jxr_keyword">null</strong>) {
-<a class="jxr_linenumber" name="95" href="#95">95</a>                  <strong class="jxr_keyword">try</strong> {
-<a class="jxr_linenumber" name="96" href="#96">96</a>                      out.close();
-<a class="jxr_linenumber" name="97" href="#97">97</a>                  } <strong class="jxr_keyword">catch</strong> (IOException ignore) {
-<a class="jxr_linenumber" name="98" href="#98">98</a>                  }
-<a class="jxr_linenumber" name="99" href="#99">99</a>              }
-<a class="jxr_linenumber" name="100" href="#100">100</a>         }
-<a class="jxr_linenumber" name="101" href="#101">101</a>     }
-<a class="jxr_linenumber" name="102" href="#102">102</a> }
+<a class="jxr_linenumber" name="62" href="#62">62</a>                  <strong class="jxr_keyword">final</strong>
+<a class="jxr_linenumber" name="63" href="#63">63</a>                  Enumeration&lt;String&gt; attibuteNames = request.getSession()
+<a class="jxr_linenumber" name="64" href="#64">64</a>                          .getAttributeNames();
+<a class="jxr_linenumber" name="65" href="#65">65</a>                  <strong class="jxr_keyword">while</strong> (attibuteNames.hasMoreElements()) {
+<a class="jxr_linenumber" name="66" href="#66">66</a>                      <strong class="jxr_keyword">final</strong> String attributeName = attibuteNames.nextElement();
+<a class="jxr_linenumber" name="67" href="#67">67</a>                      checkSerializable(request.getSession().getAttribute(
+<a class="jxr_linenumber" name="68" href="#68">68</a>                              attributeName));
+<a class="jxr_linenumber" name="69" href="#69">69</a>                  }
+<a class="jxr_linenumber" name="70" href="#70">70</a>              }
+<a class="jxr_linenumber" name="71" href="#71">71</a>          }
+<a class="jxr_linenumber" name="72" href="#72">72</a>      }
+<a class="jxr_linenumber" name="73" href="#73">73</a>  
+<a class="jxr_linenumber" name="74" href="#74">74</a>      <em class="jxr_javadoccomment">/**</em>
+<a class="jxr_linenumber" name="75" href="#75">75</a>  <em class="jxr_javadoccomment">     * Check if an object is serializable, emit a warning log if it is not.</em>
+<a class="jxr_linenumber" name="76" href="#76">76</a>  <em class="jxr_javadoccomment">     *</em>
+<a class="jxr_linenumber" name="77" href="#77">77</a>  <em class="jxr_javadoccomment">     * @param attribute</em>
+<a class="jxr_linenumber" name="78" href="#78">78</a>  <em class="jxr_javadoccomment">     *            the attribute to check</em>
+<a class="jxr_linenumber" name="79" href="#79">79</a>  <em class="jxr_javadoccomment">     */</em>
+<a class="jxr_linenumber" name="80" href="#80">80</a>      <strong class="jxr_keyword">private</strong> <strong class="jxr_keyword">void</strong> checkSerializable(<strong class="jxr_keyword">final</strong> Object attribute) {
+<a class="jxr_linenumber" name="81" href="#81">81</a>          <strong class="jxr_keyword">if</strong> (!Serializable.<strong class="jxr_keyword">class</strong>.isAssignableFrom(attribute.getClass())) {
+<a class="jxr_linenumber" name="82" href="#82">82</a>              log.warn(format(<span class="jxr_string">"Session attribute [%s] of class [%s] is not "</span>
+<a class="jxr_linenumber" name="83" href="#83">83</a>                      + <span class="jxr_string">"serializable."</span>, attribute, attribute.getClass()));
+<a class="jxr_linenumber" name="84" href="#84">84</a>          }
+<a class="jxr_linenumber" name="85" href="#85">85</a>          ObjectOutputStream out = <strong class="jxr_keyword">null</strong>;
+<a class="jxr_linenumber" name="86" href="#86">86</a>          <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="87" href="#87">87</a>              out = <strong class="jxr_keyword">new</strong> ObjectOutputStream(ByteStreams.nullOutputStream());
+<a class="jxr_linenumber" name="88" href="#88">88</a>              out.writeObject(attribute);
+<a class="jxr_linenumber" name="89" href="#89">89</a>          } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> Exception e) {
+<a class="jxr_linenumber" name="90" href="#90">90</a>              log.warn(
+<a class="jxr_linenumber" name="91" href="#91">91</a>                      format(<span class="jxr_string">"Session attribute [%s] of class [%s] threw "</span>
+<a class="jxr_linenumber" name="92" href="#92">92</a>                              + <span class="jxr_string">"exception while serializing."</span>, attribute,
+<a class="jxr_linenumber" name="93" href="#93">93</a>                              attribute.getClass()), e);
+<a class="jxr_linenumber" name="94" href="#94">94</a>          } <strong class="jxr_keyword">finally</strong> {
+<a class="jxr_linenumber" name="95" href="#95">95</a>              <strong class="jxr_keyword">if</strong> (out != <strong class="jxr_keyword">null</strong>) {
+<a class="jxr_linenumber" name="96" href="#96">96</a>                  <strong class="jxr_keyword">try</strong> {
+<a class="jxr_linenumber" name="97" href="#97">97</a>                      out.close();
+<a class="jxr_linenumber" name="98" href="#98">98</a>                  } <strong class="jxr_keyword">catch</strong> (<strong class="jxr_keyword">final</strong> IOException ignore) {
+<a class="jxr_linenumber" name="99" href="#99">99</a>                  }
+<a class="jxr_linenumber" name="100" href="#100">100</a>             }
+<a class="jxr_linenumber" name="101" href="#101">101</a>         }
+<a class="jxr_linenumber" name="102" href="#102">102</a>     }
+<a class="jxr_linenumber" name="103" href="#103">103</a> }
 </pre>
 <hr/><div id="footer">This page was automatically generated by <a href="http://maven.apache.org/">Maven</a></div></body>
 </html>
