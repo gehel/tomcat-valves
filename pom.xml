@@ -1,0 +1,91 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>ch.ledcom</groupId>
+    <artifactId>ledcom-parent-pom</artifactId>
+    <version>1.7</version>
+  </parent>
+  <groupId>ch.ledcom.tomcat.valves</groupId>
+  <artifactId>tomcat-valves</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Tomcat Valves</name>
+
+  <description>
+    A few valves to help debug special cases in Tomcat.
+  </description>
+  <url>http://gehel.github.com/tomcat-valves/</url>
+  <inceptionYear>2013</inceptionYear>
+
+  <dependencies>
+    <dependency>
+      <groupId>org.apache.tomcat</groupId>
+      <artifactId>catalina</artifactId>
+      <version>6.0.37</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>14.0.1</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.code.findbugs</groupId>
+      <artifactId>jsr305</artifactId>
+      <version>2.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-jar-plugin</artifactId>
+        <configuration>
+          <archive>
+            <manifest>
+              <mainClass>ch.ledcom.tomcat.valves.objectexplorer.InstrumentationGrabber</mainClass>
+            </manifest>
+          </archive>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-shade-plugin</artifactId>
+        <version>2.1</version>
+        <configuration>
+          <!-- put your configurations here -->
+        </configuration>
+        <executions>
+          <execution>
+            <phase>package</phase>
+            <goals>
+              <goal>shade</goal>
+            </goals>
+            <configuration>
+              <createDependencyReducedPom>false</createDependencyReducedPom>
+              <relocations>
+                <relocation>
+                  <pattern>com.google.common</pattern>
+                  <shadedPattern>ch.ledcom.tomcat.valves.guava</shadedPattern>
+                </relocation>
+              </relocations>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
+
+  <issueManagement>
+    <system>GitHub</system>
+    <url>https://github.com/gehel/tomcat-valves/issues</url>
+  </issueManagement>
+
+  <scm>
+    <connection>scm:git:git://github.com/tomcat-valves/redirect.git</connection>
+    <developerConnection>scm:git:ssh://git@github.com/gehel/tomcat-valves.git</developerConnection>
+    <url>https://github.com/gehel/tomcat-valves</url>
+  </scm>
+</project>
