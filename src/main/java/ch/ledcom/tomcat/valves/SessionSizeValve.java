@@ -16,9 +16,12 @@ package ch.ledcom.tomcat.valves;
 import static java.lang.String.format;
 
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.Enumeration;
 
+import javax.annotation.Nullable;
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpSession;
 
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
@@ -26,7 +29,9 @@ import org.apache.catalina.valves.ValveBase;
 import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 
-import ch.ledcom.tomcat.valves.objectexplorer.MemoryMeasurer;
+import com.google.common.io.ByteStreams;
+import com.google.common.io.Closer;
+import com.google.common.io.CountingOutputStream;
 
 /**
  * Logs the size of the HTTP session.
@@ -44,8 +49,10 @@ public class SessionSizeValve extends ValveBase {
     /**
      * Logs the size of the HTTP session.
      *
-     * @param request the request being served
-     * @param response the response being generated
+     * @param request
+     *            the request being served
+     * @param response
+     *            the response being generated
      * @throws IOException
      * @throws ServletException
      */
@@ -55,18 +62,45 @@ public class SessionSizeValve extends ValveBase {
         try {
             getNext().invoke(request, response);
         } finally {
-            if (!(request.getSession(false) == null)) {
-                @SuppressWarnings("unchecked")
-                Enumeration<String> attibuteNames = request.getSession()
-                        .getAttributeNames();
-                int sessionSize = 0;
-                while (attibuteNames.hasMoreElements()) {
-                    String attributeName = attibuteNames.nextElement();
-                    sessionSize += MemoryMeasurer.measureBytes(request
-                            .getSession().getAttribute(attributeName));
-                }
+            try {
+                final long sessionSize = measureSerializedSessionSize(request
+                        .getSession(false));
                 log.info(format("Session size = %d.", sessionSize));
+            } catch (final IOException ioe) {
+                log.warn("Problem measuring session size", ioe);
             }
+        }
+    }
+
+    private long measureSerializedSessionSize(
+            @Nullable final HttpSession session) throws IOException {
+        if (session == null) {
+            return 0;
+        }
+        @SuppressWarnings("unchecked")
+        final Enumeration<String> attibuteNames = session.getAttributeNames();
+        long sessionSize = 0;
+        while (attibuteNames.hasMoreElements()) {
+            final String attributeName = attibuteNames.nextElement();
+            sessionSize += measureSerializedSize(session
+                    .getAttribute(attributeName));
+        }
+        return sessionSize;
+    }
+
+    private long measureSerializedSize(final Object attribute)
+            throws IOException {
+        final Closer closer = Closer.create();
+        try {
+            final CountingOutputStream countingStream = closer
+                    .register(new CountingOutputStream(ByteStreams
+                            .nullOutputStream()));
+            final ObjectOutputStream out = closer
+                    .register(new ObjectOutputStream(countingStream));
+            out.writeObject(attribute);
+            return countingStream.getCount();
+        } finally {
+            closer.close();
         }
     }
 }

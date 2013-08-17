@@ -29,6 +29,7 @@ import org.apache.juli.logging.Log;
 import org.apache.juli.logging.LogFactory;
 
 import com.google.common.io.ByteStreams;
+import com.google.common.io.Closer;
 
 /**
  * Checks if all session attributes are serializable.
@@ -57,15 +58,22 @@ public class SessionSerializableCheckerValve extends ValveBase {
         try {
             getNext().invoke(request, response);
         } finally {
-            if (!(request.getSession(false) == null)) {
+            if ((request.getSession(false) != null)) {
                 @SuppressWarnings("unchecked")
-                final
-                Enumeration<String> attibuteNames = request.getSession()
+                final Enumeration<String> attibuteNames = request.getSession()
                         .getAttributeNames();
                 while (attibuteNames.hasMoreElements()) {
                     final String attributeName = attibuteNames.nextElement();
-                    checkSerializable(request.getSession().getAttribute(
-                            attributeName));
+                    final Object attribute = request.getSession().getAttribute(
+                            attributeName);
+                    try {
+                        checkSerializable(attribute);
+                    } catch (final Exception e) {
+                        log.warn(
+                                format("Session attribute [%s] of class [%s] threw "
+                                        + "exception while serializing.",
+                                        attribute, attribute.getClass()), e);
+                    }
                 }
             }
         }
@@ -76,28 +84,20 @@ public class SessionSerializableCheckerValve extends ValveBase {
      *
      * @param attribute
      *            the attribute to check
+     * @throws IOException
      */
-    private void checkSerializable(final Object attribute) {
+    private void checkSerializable(final Object attribute) throws IOException {
         if (!Serializable.class.isAssignableFrom(attribute.getClass())) {
             log.warn(format("Session attribute [%s] of class [%s] is not "
                     + "serializable.", attribute, attribute.getClass()));
         }
-        ObjectOutputStream out = null;
+        final Closer closer = Closer.create();
         try {
-            out = new ObjectOutputStream(ByteStreams.nullOutputStream());
+            final ObjectOutputStream out = new ObjectOutputStream(
+                    ByteStreams.nullOutputStream());
             out.writeObject(attribute);
-        } catch (final Exception e) {
-            log.warn(
-                    format("Session attribute [%s] of class [%s] threw "
-                            + "exception while serializing.", attribute,
-                            attribute.getClass()), e);
         } finally {
-            if (out != null) {
-                try {
-                    out.close();
-                } catch (final IOException ignore) {
-                }
-            }
+            closer.close();
         }
     }
 }

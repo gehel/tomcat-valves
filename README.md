@@ -24,15 +24,3 @@ To use it, add the following line in your server.xml, as part of an Engine,
 Host or Context :
 
     <valve classname="ch.ledcom.tomcat.valves.SessionSizeValve">
-
-You will also need to configure tomcat-valves as a java agent, by adding the
-following to your startup script:
-
-    -javaagent:path/to/tomcat-valves-<version>.jar
-
-Notes
------
-Code in the `ch.ledcom.tomcat.valves.objectexplorer`package is taken from
-[memory-measurer][memory-measurer].
-
-[memory-measurer]: https://code.google.com/p/memory-measurer/
