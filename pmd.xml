@@ -1,8 +1,3 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<pmd version="4.3" timestamp="2013-07-07T19:21:23.404">
-<file name="/scratch/jenkins/workspace/tomcat-valves-deploy/src/main/java/ch/ledcom/tomcat/valves/SessionSerializableCheckerValve.java">
-<violation beginline="98" endline="99" begincolumn="19" endcolumn="17" rule="EmptyCatchBlock" ruleset="Basic Rules" package="ch.ledcom.tomcat.valves" class="SessionSerializableCheckerValve" method="checkSerializable" externalInfoUrl="http://pmd.sourceforge.net/rules/basic.html#EmptyCatchBlock" priority="3">
-Avoid empty catch blocks
-</violation>
-</file>
+<pmd version="4.3" timestamp="2013-08-18T16:36:07.512">
 </pmd>

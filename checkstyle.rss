@@ -8,8 +8,8 @@
     <language>en-us</language>
     <copyright>&#169;2013 LedCom</copyright>
     <item>
-      <title>File: 8,
-             Errors: 133,
+      <title>File: 3,
+             Errors: 8,
              Warnings: 0,
              Infos: 0
       </title>
@@ -38,49 +38,7 @@
                   0
                 </td>
                 <td>
-                  2
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.objectexplorer.ObjectExplorer.java">ch/ledcom/tomcat/valves/objectexplorer/ObjectExplorer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  35
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.objectexplorer.MemoryMeasurer.java">ch/ledcom/tomcat/valves/objectexplorer/MemoryMeasurer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  20
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.objectexplorer.Chain.java">ch/ledcom/tomcat/valves/objectexplorer/Chain.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  63
+                  4
                 </td>
               </tr>
                           <tr>
@@ -99,34 +57,6 @@
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.objectexplorer.InstrumentationGrabber.java">ch/ledcom/tomcat/valves/objectexplorer/InstrumentationGrabber.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  9
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.objectexplorer.ObjectVisitor.java">ch/ledcom/tomcat/valves/objectexplorer/ObjectVisitor.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  1
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.SessionSerializableCheckerValve.java">ch/ledcom/tomcat/valves/SessionSerializableCheckerValve.java</a>
                 </td>
                 <td>
@@ -136,7 +66,7 @@
                   0
                 </td>
                 <td>
-                  3
+                  4
                 </td>
               </tr>
                       </tbody>
