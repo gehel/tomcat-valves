@@ -24,3 +24,7 @@ To use it, add the following line in your server.xml, as part of an Engine,
 Host or Context :
 
     <valve classname="ch.ledcom.tomcat.valves.SessionSizeValve">
+
+
+[![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/gehel/tomcat-valves/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
+
