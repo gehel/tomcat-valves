@@ -7,7 +7,7 @@
     </parent>
     <groupId>ch.ledcom.tomcat.valves</groupId>
     <artifactId>tomcat-valves</artifactId>
-    <version>0.5</version>
+    <version>0.6-SNAPSHOT</version>
     <name>Tomcat Valves</name>
 
     <description>
