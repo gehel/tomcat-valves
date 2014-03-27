@@ -11,7 +11,7 @@
  *     See the License for the specific language governing permissions and
  *     limitations under the License.
  */
-package ch.ledcom.tomcat.valves;
+package ch.ledcom.tomcat.valves.allocation;
 
 import com.google.monitoring.runtime.instrumentation.AllocationRecorder;
 import com.google.monitoring.runtime.instrumentation.Sampler;
@@ -25,7 +25,8 @@ public class MultipleThreadsAllocationTest {
         AllocationRecorder.addSampler(new Sampler() {
             @Override
             public void sampleAllocation(int count, String desc, Object newObject, long size) {
-                if (!Thread.currentThread().getName().equals("main")) {
+                if (Thread.currentThread().getName().equals("t1")
+                        || Thread.currentThread().getName().equals("t2")) {
                     System.out.println(Thread.currentThread().getName() + ":" + newObject.getClass().getName() + ":" + newObject);
                 }
             }
@@ -35,40 +36,12 @@ public class MultipleThreadsAllocationTest {
     @Test
     public void allocationFromTwoThreadIsRecognizable() throws InterruptedException {
         System.out.println("start");
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new Dummy("1");
-            }
-        }, "t1").start();
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                new Dummy("2");
-            }
-        }, "t2").start();
-        System.out.println("in progress");
-        Thread.sleep(20);
-        System.out.println("stop");
-    }
-
-    public static void main(String[] args) throws InterruptedException {
-        MultipleThreadsAllocationTest test = new MultipleThreadsAllocationTest();
-        test.initializeAllocationRecorder();
-        test.allocationFromTwoThreadIsRecognizable();
-    }
-
-    private static final class Dummy {
-        private final String name;
-
-        private Dummy(String name) {
-            this.name = name;
-        }
-
-        @Override
-        public String toString() {
-            return name;
-        }
+        Thread t1 = new Thread(new DummyAllocator(2), "t1");
+        t1.start();
+        Thread t2 = new Thread(new DummyAllocator(4), "t2");
+        t2.start();
+        t1.join();
+        t2.join();
     }
 
 }
