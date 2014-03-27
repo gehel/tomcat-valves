@@ -14,6 +14,7 @@
 package ch.ledcom.tomcat.valves.allocation;
 
 import ch.ledcom.tomcat.valves.SessionSerializableCheckerValve;
+import com.google.common.collect.ImmutableSet;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
@@ -22,9 +23,7 @@ import org.apache.juli.logging.LogFactory;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -43,7 +42,7 @@ public class RequestAllocationRecorder extends ValveBase {
 
     private final ThreadAllocationTracer threadAllocationTracer;
 
-    private final List<AllocationReporter> reporters;
+    private final ImmutableSet<AllocationReporter> reporters;
 
     public RequestAllocationRecorder() {
         disabled = parseBoolean(System.getProperty(PROP_DISABLED), false);
@@ -56,12 +55,13 @@ public class RequestAllocationRecorder extends ValveBase {
             threadAllocationTracer = null;
         }
 
-        reporters = new ArrayList<AllocationReporter>();
-        reporters.add(new AllocationLogger());
+        ImmutableSet.Builder<AllocationReporter> builder = ImmutableSet.<AllocationReporter>builder();
+        builder.add(new AllocationLogger());
 
         if (printSummary) {
-            reporters.add(new SummaryAllocationLogger(printSummaryPeriod));
+            builder.add(new SummaryAllocationLogger(printSummaryPeriod));
         }
+        reporters = builder.build();
     }
 
     /**

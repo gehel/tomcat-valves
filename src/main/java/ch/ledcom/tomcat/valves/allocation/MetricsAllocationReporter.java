@@ -13,18 +13,32 @@
  */
 package ch.ledcom.tomcat.valves.allocation;
 
-import ch.ledcom.tomcat.valves.SessionSerializableCheckerValve;
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
+import com.codahale.metrics.Histogram;
+import com.codahale.metrics.MetricRegistry;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 /**
- * Created by gehel on 3/27/14.
+ * Created by gehel on 27/03/14.
  */
-public class AllocationLogger implements AllocationReporter {
-    private static Log log = LogFactory.getLog(AllocationLogger.class);
+public class MetricsAllocationReporter implements AllocationReporter {
+
+    private final MetricRegistry metrics;
+    private final String prefix;
+
+    public MetricsAllocationReporter(MetricRegistry metrics, String prefix) {
+        this.metrics = metrics;
+        this.prefix = prefix;
+    }
 
     @Override
     public void report(String context, Long totalRequestAllocation) {
-        log.info("Memory allocated : " + context + " - " + totalRequestAllocation);
+        metrics.histogram(computeMetricName(context)).update(totalRequestAllocation);
+    }
+
+    private String computeMetricName(String context) {
+        return prefix + context;
     }
 }

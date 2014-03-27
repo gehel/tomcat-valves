@@ -1,6 +1,9 @@
+env:
+  global:
+    - secure: "GJXohmSLYuTz9Aha1ADmiTpcG5YTwK9+Btb/75iAQRxXckIMQrk+wX/PFOBhiwJj9/qoorVhb3RXW9AXe8nM3AmiLdErZ6ohC47ixkPwtdjkH0newQySixAb3ise++VJenWp3cx8zrG6dBtXdT6nAkLUN9lYr1pXS75GmazDXqk="
 language: java
 jdk:
   - oraclejdk7
   - openjdk6
   - openjdk7
-
+script: "mvn deploy"
