@@ -25,6 +25,5 @@ Host or Context :
 
     <valve classname="ch.ledcom.tomcat.valves.SessionSizeValve">
 
-
+[![Build Status](https://travis-ci.org/gehel/tomcat-valves.svg?branch=tomcat-valves-0.5)](https://travis-ci.org/gehel/tomcat-valves)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/gehel/tomcat-valves/trend.png)](https://bitdeli.com/free "Bitdeli Badge")
-
