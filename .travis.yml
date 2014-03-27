@@ -6,4 +6,6 @@ jdk:
   - oraclejdk7
   - openjdk6
   - openjdk7
-script: "mvn deploy"
+script: "mvn verify"
+after_success:
+  - mvn clean deploy --settings settings.xml
