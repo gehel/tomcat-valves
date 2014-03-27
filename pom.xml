@@ -149,7 +149,7 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git://github.com/tomcat-valves/redirect.git</connection>
+        <connection>scm:git:git://github.com/gehel/tomcat-valves.git</connection>
         <developerConnection>scm:git:ssh://git@github.com/gehel/tomcat-valves.git</developerConnection>
         <url>https://github.com/gehel/tomcat-valves</url>
     </scm>
