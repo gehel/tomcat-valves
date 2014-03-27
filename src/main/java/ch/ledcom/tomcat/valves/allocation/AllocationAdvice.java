@@ -14,9 +14,7 @@
 package ch.ledcom.tomcat.valves.allocation;
 
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.springframework.aop.aspectj.MethodInvocationProceedingJoinPoint;
 
-import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -38,7 +36,7 @@ public class AllocationAdvice {
         tracer.mark();
         Object retVal = pjp.proceed();
         long allocatedMemory = tracer.allocatedSinceMark();
-        for(AllocationReporter reporter : reporters) {
+        for (AllocationReporter reporter : reporters) {
             reporter.report(pjp.toShortString(), allocatedMemory);
         }
         return retVal;
