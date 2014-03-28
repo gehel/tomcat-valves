@@ -55,7 +55,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  3
+                  4
                 </td>
               </tr>
                           <tr>
@@ -88,20 +88,6 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.java">ch/ledcom/tomcat/valves/allocation/RequestAllocationRecorderValve.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  22
-                </td>
-              </tr>
-                          <tr>
-                <td>
                   <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.JmxSingleThreadAllocationTracer.java">ch/ledcom/tomcat/valves/allocation/JmxSingleThreadAllocationTracer.java</a>
                 </td>
                 <td>
@@ -112,6 +98,20 @@ under the License.
                 </td>
                 <td>
                   4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.java">ch/ledcom/tomcat/valves/allocation/RequestAllocationRecorderValve.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  22
                 </td>
               </tr>
                           <tr>
@@ -209,7 +209,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  2
+                  1
                 </td>
               </tr>
                           <tr>
