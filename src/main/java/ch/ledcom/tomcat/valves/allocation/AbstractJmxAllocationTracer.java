@@ -21,10 +21,22 @@ import java.lang.management.ManagementFactory;
  */
 public abstract class AbstractJmxAllocationTracer implements ThreadAllocationTracer {
     private static final ObjectName THREADING_MBEAN = Jmx.newObjectName("java.lang:type=Threading");
-    private final Jmx jmx = new Jmx(ManagementFactory.getPlatformMBeanServer());
+
+    private static final ThreadLocal<Jmx> jmx = new ThreadLocal<Jmx>(){
+        @Override
+        public Jmx initialValue() {
+            return new Jmx(ManagementFactory.getPlatformMBeanServer());
+        }
+    };
 
     protected Long retrieveCurrentThreadAllocation() {
         long threadId = Thread.currentThread().getId();
-        return jmx.invoke(THREADING_MBEAN, "getThreadAllocatedBytes", new Object[]{threadId}, new String[]{"long"}, Long.class);
+        return jmx.get().invoke(
+                THREADING_MBEAN,
+                "getThreadAllocatedBytes",
+                new Object[]{threadId},
+                new String[]{"long"},
+                Long.class);
     }
+
 }
