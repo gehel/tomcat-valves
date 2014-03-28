@@ -83,7 +83,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  1
+                  2
                 </td>
               </tr>
                           <tr>
@@ -97,7 +97,7 @@ under the License.
                   0
                 </td>
                 <td>
-                  23
+                  22
                 </td>
               </tr>
                           <tr>
@@ -172,7 +172,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.InstrumentedThreadAllocationTracer.java">ch/ledcom/tomcat/valves/allocation/InstrumentedThreadAllocationTracer.java</a>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.AllocationAdvice.java">ch/ledcom/tomcat/valves/allocation/AllocationAdvice.java</a>
                 </td>
                 <td>
                   0
@@ -186,7 +186,7 @@ under the License.
               </tr>
                           <tr>
                 <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.AllocationAdvice.java">ch/ledcom/tomcat/valves/allocation/AllocationAdvice.java</a>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.InstrumentedThreadAllocationTracer.java">ch/ledcom/tomcat/valves/allocation/InstrumentedThreadAllocationTracer.java</a>
                 </td>
                 <td>
                   0
