@@ -17,13 +17,31 @@ Host or Context:
 
 SessionSizeValve
 ----------------
-This valve will print the size of each session. It uses a bundled version of
-[memory-measurer][memory-measurer]
+This valve will print the size of each session.
 
 To use it, add the following line in your server.xml, as part of an Engine,
 Host or Context :
 
     <valve classname="ch.ledcom.tomcat.valves.SessionSizeValve">
+
+RequestAllocationRecorderValve
+------------------------------
+This valve will print the amount of memory allocated by each HTTP request.
+
+The following system properties can be used to further configure it :
+
+<dl>
+  <dt>`ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.disabled`</dt>
+  <dd>Disable the valve</dd>
+  <dt>`ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.printSummary`</dt>
+  <dd>Will also print a summary of the allocation for all requests</dd>
+  <dt>`ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.printSummary.period`</dt>
+  <dd>Print the summary for one in `period` requests</dd>
+</dl>
+
+AllocationAdvice
+----------------
+Can be used with Spring AOP to record allocation in part of your code. See code for details.
 
 [![Build Status](https://travis-ci.org/gehel/tomcat-valves.svg)](https://travis-ci.org/gehel/tomcat-valves)
 [![Bitdeli Badge](https://d2weczhvl823v0.cloudfront.net/gehel/tomcat-valves/trend.png)](https://bitdeli.com/free "Bitdeli Badge")

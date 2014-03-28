@@ -13,26 +13,20 @@
  */
 package ch.ledcom.tomcat.valves.allocation;
 
-import ch.ledcom.tomcat.valves.SessionSerializableCheckerValve;
 import com.google.common.collect.ImmutableSet;
 import org.apache.catalina.connector.Request;
 import org.apache.catalina.connector.Response;
 import org.apache.catalina.valves.ValveBase;
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
 
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * Created by gehel on 26/03/14.
  */
-public class RequestAllocationRecorder extends ValveBase {
+public class RequestAllocationRecorderValve extends ValveBase {
 
-    public static final String PROP_PREFIX = RequestAllocationRecorder.class.getCanonicalName();
+    public static final String PROP_PREFIX = RequestAllocationRecorderValve.class.getCanonicalName();
 
     public static final String PROP_DISABLED = PROP_PREFIX + ".disabled";
     public static final String PROP_PRINT_SUMMARY = PROP_PREFIX + ".printSummary";
@@ -44,7 +38,7 @@ public class RequestAllocationRecorder extends ValveBase {
 
     private final ImmutableSet<AllocationReporter> reporters;
 
-    public RequestAllocationRecorder() {
+    public RequestAllocationRecorderValve() {
         disabled = parseBoolean(System.getProperty(PROP_DISABLED), false);
         boolean printSummary = parseBoolean(System.getProperty(PROP_PRINT_SUMMARY), false);
         int printSummaryPeriod = parseInt(System.getProperty(PROP_PRINT_SUMMARY_PERIOD), 1);
@@ -55,7 +49,7 @@ public class RequestAllocationRecorder extends ValveBase {
             threadAllocationTracer = null;
         }
 
-        ImmutableSet.Builder<AllocationReporter> builder = ImmutableSet.<AllocationReporter>builder();
+        ImmutableSet.Builder<AllocationReporter> builder = ImmutableSet.builder();
         builder.add(new AllocationLogger());
 
         if (printSummary) {
