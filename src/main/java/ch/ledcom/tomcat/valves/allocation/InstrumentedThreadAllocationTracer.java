@@ -24,7 +24,7 @@ public class InstrumentedThreadAllocationTracer implements ThreadAllocationTrace
     private final ThreadLocal<Long> allocationSize = new ThreadLocal<Long>(){
         @Override
         public Long initialValue() {
-            return Long.valueOf(0L);
+            return 0L;
         }
     };
 
@@ -40,7 +40,7 @@ public class InstrumentedThreadAllocationTracer implements ThreadAllocationTrace
 
     @Override
     public void mark() {
-        allocationSize.set(Long.valueOf(0L));
+        allocationSize.set(0L);
     }
 
     @Override
@@ -48,4 +48,5 @@ public class InstrumentedThreadAllocationTracer implements ThreadAllocationTrace
         Long allocatedSinceMark = allocationSize.get();
         return allocatedSinceMark != null ? allocatedSinceMark : 0L;
     }
+
 }

@@ -14,20 +14,11 @@
 package ch.ledcom.tomcat.valves.allocation;
 
 /**
- * Created by gehel on 3/27/14.
+ * Created by gehel on 28/03/14.
  */
-public class JmxThreadAllocationTracer extends AbstractJmxAllocationTracer {
-
-    private final ThreadLocal<Long> allocationSize = new ThreadLocal<Long>();
-
+public class JmxSingleThreadTracerFactory implements AllocationTracerFactory {
     @Override
-    public void mark() {
-        allocationSize.set(retrieveCurrentThreadAllocation());
+    public ThreadAllocationTracer create() {
+        return new JmxSingleThreadAllocationTracer();
     }
-
-    @Override
-    public long allocatedSinceMark() {
-        return retrieveCurrentThreadAllocation() - allocationSize.get();
-    }
-
 }

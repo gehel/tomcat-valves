@@ -13,21 +13,18 @@
  */
 package ch.ledcom.tomcat.valves.allocation;
 
+import javax.management.ObjectName;
+import java.lang.management.ManagementFactory;
+
 /**
- * Created by gehel on 3/27/14.
+ * Created by gehel on 28/03/14.
  */
-public class JmxThreadAllocationTracer extends AbstractJmxAllocationTracer {
+public abstract class AbstractJmxAllocationTracer implements ThreadAllocationTracer {
+    private static final ObjectName THREADING_MBEAN = Jmx.newObjectName("java.lang:type=Threading");
+    private final Jmx jmx = new Jmx(ManagementFactory.getPlatformMBeanServer());
 
-    private final ThreadLocal<Long> allocationSize = new ThreadLocal<Long>();
-
-    @Override
-    public void mark() {
-        allocationSize.set(retrieveCurrentThreadAllocation());
+    protected Long retrieveCurrentThreadAllocation() {
+        long threadId = Thread.currentThread().getId();
+        return jmx.invoke(THREADING_MBEAN, "getThreadAllocatedBytes", new Object[]{threadId}, new String[]{"long"}, Long.class);
     }
-
-    @Override
-    public long allocatedSinceMark() {
-        return retrieveCurrentThreadAllocation() - allocationSize.get();
-    }
-
 }

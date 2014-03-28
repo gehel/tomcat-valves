@@ -24,15 +24,16 @@ import java.util.Set;
  */
 public class AllocationAdvice {
 
-    private final ThreadAllocationTracer tracer;
+    private final AllocationTracerFactory tracerFactory;
     private final Set<AllocationReporter> reporters;
 
-    public AllocationAdvice(ThreadAllocationTracer tracer, Set<AllocationReporter> reporters) {
-        this.tracer = tracer;
+    public AllocationAdvice(AllocationTracerFactory tracerFactory, Set<AllocationReporter> reporters) {
+        this.tracerFactory = tracerFactory;
         this.reporters = reporters;
     }
 
     public Object traceAllocation(ProceedingJoinPoint pjp) throws Throwable {
+        ThreadAllocationTracer tracer = tracerFactory.create();
         tracer.mark();
         Object retVal = pjp.proceed();
         long allocatedMemory = tracer.allocatedSinceMark();
