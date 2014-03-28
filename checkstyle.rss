@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+Licensed to the Apache Software Foundation (ASF) under one
+or more contributor license agreements.  See the NOTICE file
+distributed with this work for additional information
+regarding copyright ownership.  The ASF licenses this file
+to you under the Apache License, Version 2.0 (the
+"License"); you may not use this file except in compliance
+with the License.  You may obtain a copy of the License at
 
+  http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing,
+software distributed under the License is distributed on an
+"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+KIND, either express or implied.  See the License for the
+specific language governing permissions and limitations
+under the License.
+-->
 <rss version="0.91">
   <channel>
     <title>Tomcat Valves - Checkstyle report</title>
     <link>http://gehel.github.com/tomcat-valves/</link>
     <description>Tomcat Valves - Checkstyle report</description>
     <language>en-us</language>
-    <copyright>&#169;2013 LedCom</copyright>
+    <copyright>&#169;2013 - 2014 LedCom</copyright>
     <item>
-      <title>File: 3,
-             Errors: 8,
+      <title>File: 14,
+             Errors: 146,
              Warnings: 0,
              Infos: 0
       </title>
@@ -29,7 +46,7 @@
           <tbody>
                           <tr>
                 <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.SessionSizeValve.java">ch/ledcom/tomcat/valves/SessionSizeValve.java</a>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.JmxThreadAllocationTracer.java">ch/ledcom/tomcat/valves/allocation/JmxThreadAllocationTracer.java</a>
                 </td>
                 <td>
                   0
@@ -38,7 +55,49 @@
                   0
                 </td>
                 <td>
-                  4
+                  8
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorder.java">ch/ledcom/tomcat/valves/allocation/RequestAllocationRecorder.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  28
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.Jmx.java">ch/ledcom/tomcat/valves/allocation/Jmx.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  24
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.AllocationReporter.java">ch/ledcom/tomcat/valves/allocation/AllocationReporter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  1
                 </td>
               </tr>
                           <tr>
@@ -53,6 +112,118 @@
                 </td>
                 <td>
                   0
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.AllocationLogger.java">ch/ledcom/tomcat/valves/allocation/AllocationLogger.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  6
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.SessionSizeValve.java">ch/ledcom/tomcat/valves/SessionSizeValve.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  4
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.JmxException.java">ch/ledcom/tomcat/valves/allocation/JmxException.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  5
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.ThreadAllocationTracer.java">ch/ledcom/tomcat/valves/allocation/ThreadAllocationTracer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  3
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.InstrumentedThreadAllocationTracer.java">ch/ledcom/tomcat/valves/allocation/InstrumentedThreadAllocationTracer.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  12
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.AllocationAdvice.java">ch/ledcom/tomcat/valves/allocation/AllocationAdvice.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  12
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.MetricsAllocationReporter.java">ch/ledcom/tomcat/valves/allocation/MetricsAllocationReporter.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  17
+                </td>
+              </tr>
+                          <tr>
+                <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.SummaryAllocationLogger.java">ch/ledcom/tomcat/valves/allocation/SummaryAllocationLogger.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  22
                 </td>
               </tr>
                           <tr>
