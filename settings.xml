@@ -32,6 +32,9 @@
     <profiles>
         <profile>
             <id>github</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
             <properties>
                 <github.global.userName>gehel</github.global.userName>
                 <github.global.password>${env.GITHUB_PASSWORD}</github.global.password>
