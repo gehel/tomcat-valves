@@ -31,12 +31,12 @@ This valve will print the amount of memory allocated by each HTTP request.
 The following system properties can be used to further configure it :
 
 <dl>
-  <dt>`ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.disabled`</dt>
+  <dt><code>ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.disabled</code></dt>
   <dd>Disable the valve</dd>
-  <dt>`ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.printSummary`</dt>
+  <dt><code>ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.printSummary</code></dt>
   <dd>Will also print a summary of the allocation for all requests</dd>
-  <dt>`ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.printSummary.period`</dt>
-  <dd>Print the summary for one in `period` requests</dd>
+  <dt><code>ch.ledcom.tomcat.valves.allocation.RequestAllocationRecorderValve.printSummary.period</code></dt>
+  <dd>Print the summary for one in <code>period</code> requests</dd>
 </dl>
 
 AllocationAdvice
