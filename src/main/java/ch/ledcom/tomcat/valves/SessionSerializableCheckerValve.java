@@ -95,9 +95,11 @@ public class SessionSerializableCheckerValve extends ValveBase {
         }
         final Closer closer = Closer.create();
         try {
-            final ObjectOutputStream out = new ObjectOutputStream(
-                    ByteStreams.nullOutputStream());
+            final ObjectOutputStream out = closer.register(new ObjectOutputStream(
+                    ByteStreams.nullOutputStream()));
             out.writeObject(attribute);
+        } catch (Throwable t) {
+            closer.rethrow(t);
         } finally {
             closer.close();
         }

@@ -25,20 +25,10 @@ import static com.google.common.base.MoreObjects.firstNonNull;
  */
 public class InstrumentedThreadAllocationTracer implements ThreadAllocationTracer {
 
-    private final ThreadLocal<Long> allocationSize = new ThreadLocal<Long>() {
-        @Override
-        public Long initialValue() {
-            return 0L;
-        }
-    };
+    private final ThreadLocal<Long> allocationSize = new AllocationSizeThreadLocal();
 
     public InstrumentedThreadAllocationTracer() {
-        AllocationRecorder.addSampler(new Sampler() {
-            @Override
-            public void sampleAllocation(int count, String desc, Object newObject, long size) {
-                allocationSize.set(allocationSize.get() + size);
-            }
-        });
+        AllocationRecorder.addSampler(new ThreadAllocationSampler(allocationSize));
 
     }
 
@@ -52,4 +42,24 @@ public class InstrumentedThreadAllocationTracer implements ThreadAllocationTrace
         return firstNonNull(allocationSize.get(), 0L);
     }
 
+    private static final class ThreadAllocationSampler implements Sampler {
+
+        private final ThreadLocal<Long> allocationSize;
+
+        private ThreadAllocationSampler(ThreadLocal<Long> allocationSize) {
+            this.allocationSize = allocationSize;
+        }
+
+        @Override
+        public void sampleAllocation(int count, String desc, Object newObject, long size) {
+            allocationSize.set(allocationSize.get() + size);
+        }
+    }
+
+    private static final class AllocationSizeThreadLocal extends ThreadLocal<Long> {
+        @Override
+        public Long initialValue() {
+            return 0L;
+        }
+    }
 }
