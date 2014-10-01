@@ -9,6 +9,8 @@ language: java
 jdk:
   - openjdk7
   - oraclejdk7
-script: "mvn verify"
+install: mvn install -DskipTests=true -Dmaven.javadoc.skip=true -Dcobertura.skip=true --settings settings.xml -B -V
+script:
+- mvn verify --settings settings.xml -B -V
 after_success:
-  - mvn clean deploy site --settings settings.xml
+  - mvn clean deploy site --settings settings.xml -B -V
