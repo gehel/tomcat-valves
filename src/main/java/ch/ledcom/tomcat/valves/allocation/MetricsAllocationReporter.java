@@ -13,12 +13,7 @@
  */
 package ch.ledcom.tomcat.valves.allocation;
 
-import com.codahale.metrics.Histogram;
 import com.codahale.metrics.MetricRegistry;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 /**
  * Created by gehel on 27/03/14.

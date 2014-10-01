@@ -77,7 +77,7 @@ public class RequestAllocationRecorderValve extends ValveBase {
             String requestURI = request.getRequestURI();
             Long totalRequestAllocation = threadAllocationTracer.allocatedSinceMark();
 
-            for(AllocationReporter reporter : reporters) {
+            for (AllocationReporter reporter : reporters) {
                 reporter.report(requestURI, totalRequestAllocation);
             }
 

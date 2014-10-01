@@ -16,12 +16,14 @@ package ch.ledcom.tomcat.valves.allocation;
 import com.google.monitoring.runtime.instrumentation.AllocationRecorder;
 import com.google.monitoring.runtime.instrumentation.Sampler;
 
+import static com.google.common.base.MoreObjects.firstNonNull;
+
 /**
  * Created by gehel on 3/27/14.
  */
 public class InstrumentedThreadAllocationTracer implements ThreadAllocationTracer {
 
-    private final ThreadLocal<Long> allocationSize = new ThreadLocal<Long>(){
+    private final ThreadLocal<Long> allocationSize = new ThreadLocal<Long>() {
         @Override
         public Long initialValue() {
             return 0L;
@@ -45,8 +47,7 @@ public class InstrumentedThreadAllocationTracer implements ThreadAllocationTrace
 
     @Override
     public long allocatedSinceMark() {
-        Long allocatedSinceMark = allocationSize.get();
-        return allocatedSinceMark != null ? allocatedSinceMark : 0L;
+        return firstNonNull(allocationSize.get(), 0L);
     }
 
 }

@@ -11,19 +11,7 @@
  *     See the License for the specific language governing permissions and
  *     limitations under the License.
  */
-package ch.ledcom.tomcat.valves.allocation;
-
-import org.apache.juli.logging.Log;
-import org.apache.juli.logging.LogFactory;
-
 /**
- * Created by gehel on 3/27/14.
+ * Tomcat valves.
  */
-public class AllocationLogger implements AllocationReporter {
-    private static Log log = LogFactory.getLog(AllocationLogger.class);
-
-    @Override
-    public void report(String context, Long totalRequestAllocation) {
-        log.info("Memory allocated : " + context + " - " + totalRequestAllocation);
-    }
-}
+package ch.ledcom.tomcat.valves.allocation;
