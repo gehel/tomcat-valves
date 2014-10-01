@@ -60,7 +60,7 @@ public class SessionSerializableCheckerValve extends ValveBase {
         try {
             getNext().invoke(request, response);
         } finally {
-            if ((request.getSession(false) != null)) {
+            if (request.getSession(false) != null) {
                 @SuppressWarnings("unchecked")
                 final Enumeration<String> attibuteNames = request.getSession()
                         .getAttributeNames();
