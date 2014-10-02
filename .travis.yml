@@ -14,3 +14,5 @@ script:
 - mvn verify --settings settings.xml -B -V
 after_success:
   - mvn clean deploy site --settings settings.xml -B -V
+git:
+  depth: 500
