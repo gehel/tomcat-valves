@@ -186,6 +186,20 @@ under the License.
               </tr>
                           <tr>
                 <td>
+                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.package-info.java">ch/ledcom/tomcat/valves/allocation/package-info.java</a>
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+                <td>
+                  0
+                </td>
+              </tr>
+                          <tr>
+                <td>
                   <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.JmxSingleThreadTracerFactory.java">ch/ledcom/tomcat/valves/allocation/JmxSingleThreadTracerFactory.java</a>
                 </td>
                 <td>
@@ -201,20 +215,6 @@ under the License.
                           <tr>
                 <td>
                   <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.ThreadAllocationTracer.java">ch/ledcom/tomcat/valves/allocation/ThreadAllocationTracer.java</a>
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-                <td>
-                  0
-                </td>
-              </tr>
-                          <tr>
-                <td>
-                  <a href="http://gehel.github.com/tomcat-valves//checkstyle.html#ch.ledcom.tomcat.valves.allocation.package-info.java">ch/ledcom/tomcat/valves/allocation/package-info.java</a>
                 </td>
                 <td>
                   0
